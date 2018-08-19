@@ -11,7 +11,7 @@
 #     TARGET_BRANCH=$1
 # fi
 
-CURRENT_BRANCH=$('git rev-parse --abbrev-ref HEAD')
+CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 git checkout master #$TARGET_BRANCH
 git pull
