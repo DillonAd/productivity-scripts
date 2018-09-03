@@ -11,5 +11,5 @@ IF [%1] == [] (
         ECHO "%PATH%;%TOOL_DIR%"
         SETX PATH "%PATH%;%TOOL_DIR%" /m
     )
-    ROBOCOPY ./ %TOOL_DIR% %TOOL%
+    MKLINK %TOOL_DIR%\%TOOL% %CD%\%TOOL% 
 )
