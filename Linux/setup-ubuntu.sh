@@ -38,3 +38,5 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt update
 sudo apt-get install docker-ce
 
+# Install Slack
+ sudo snap install slack --classic
