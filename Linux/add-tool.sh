@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 PATH_TO_TOOL=$1
 
-# echo "$1" >> ~/.bashrc
-
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
