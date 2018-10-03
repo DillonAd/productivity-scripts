@@ -1,7 +1,7 @@
 @echo off
 
 SET TOOL=%1
-SET TOOL_DIR=C:\Custom\
+SET TOOL_DIR=C:\Custom
 SET PATH_TXT=%PATH%
 
 IF [%1]==[--help] GOTO :help
@@ -24,6 +24,7 @@ goto end
 
 :main
 IF NOT "x%PATH_TXT%"=="x!PATH_TXT:%TOOL_DIR%=!" ( 
+    ECHO Added "%TOOL_DIR%" to path!
     SETX PATH "%PATH%;%TOOL_DIR%" /m
 )
 MKLINK %TOOL_DIR%\%TOOL% %CD%\%TOOL% 
