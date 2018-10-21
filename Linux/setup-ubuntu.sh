@@ -55,24 +55,7 @@ echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | su
 sudo apt update
 sudo apt install -y mono-devel
 
-
-# ZSH / Bash Completion
-sudo apt install -y zsh bash-completion
-
-# Git Completion
-GIT_VERSION=`git --version | awk '{print $3}'`
-URL="https://raw.github.com/git/git/v$GIT_VERSION/contrib/completion/git-completion.bash"
-curl "$URL" --silent --output "$HOME/.git-completion.bash"
-
-# Oh My ZSH
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/theme_chooser.sh | sh -s gnzh
-
-# Oh My ZSH - Plugins
-git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
-git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
-
-chsh -s $(which zsh)
+# JLDeen's DotFiles
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/jldeen/dotfiles/wsl/configure.sh)"
 
 sudo reboot
