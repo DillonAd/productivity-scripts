@@ -2,9 +2,9 @@
 
 # Basics
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 
-sudo apt install curl wget
+sudo apt install -y curl wget
 
 # Git
 sudo apt install -y git
