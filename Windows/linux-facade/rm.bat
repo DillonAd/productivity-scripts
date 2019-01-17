@@ -1,2 +1,7 @@
 @echo off
-del %1
+
+if exist "%1\" (
+    rmdir /s /q %1
+) else (
+    del %1
+)
