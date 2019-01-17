@@ -13,7 +13,11 @@ IF [%1] == [] (
     SET TARGET_BRANCH=%1
 )
 
+ECHO Target Branch : %TARGET_BRANCH%
+
 FOR /F %%F IN ('git rev-parse --abbrev-ref HEAD') DO SET CURRENT_BRANCH=%%F
+
+ECHO Current Branch : %CURRENT_BRANCH%
 
 git checkout %TARGET_BRANCH%
 git pull
