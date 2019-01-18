@@ -3,7 +3,7 @@ PATH_TO_TOOL=$1
 
 if [[ $EUID -ne 0 ]]
   then echo "Please run as root"
-  exit
+  exit 1
 fi
 
 SCRIPT_NAME=$(basename $1)
