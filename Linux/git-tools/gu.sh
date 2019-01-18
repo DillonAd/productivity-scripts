@@ -10,8 +10,12 @@ if [ -z "$1" ]; then
 else
     TARGET_BRANCH=$1
 fi
-echo $TARGET_BRANCH
+
+echo Target Branch : $TARGET_BRANCH
+
 CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+echo Current Branch : $CURRENT_BRANCH
 
 git checkout $TARGET_BRANCH
 git pull
