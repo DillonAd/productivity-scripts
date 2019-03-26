@@ -18,4 +18,7 @@ FOR /F %%F IN ('git rev-parse --abbrev-ref HEAD') DO SET CURRENT_BRANCH=%%F
 
 ECHO Current Branch : %CURRENT_BRANCH%
 
+git checkout %TARGET_BRANCH%
+git pull
+git checkout %CURRENT_BRANCH%
 git rebase %TARGET_BRANCH% %CURRENT_BRANCH%
