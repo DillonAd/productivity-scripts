@@ -10,7 +10,7 @@ IF [%1] == [] (
     ECHO No new branch name specified
     EXIT 1
 ) ELSE (
-    SET TARGET_BRANCH=%1
+    SET NEW_BRANCH=%1
 )
 
 IF [%2] == [] (
@@ -20,4 +20,4 @@ IF [%2] == [] (
 )
 
 git checkout %SOURCE_BRANCH%
-git checkout -b %TARGET_BRANCH%
+git checkout -b %NEW_BRANCH%
