@@ -7,17 +7,16 @@ REM This script is intended to create a new branch from the master branch
 REM
 
 IF [%1] == [] (
-    ECHO No new branch name specified
-    EXIT 1
+    SET TARGET_BRANCH=master
 ) ELSE (
-    SET NEW_BRANCH=%1
+    SET TARGET_BRANCH=%1
 )
 
 IF [%2] == [] (
     SET SOURCE_BRANCH=master
 ) ELSE (
-    SET SOURCE_BRANCH=%2
+    SET SOURCE_BRANCH=%1
 )
 
 git checkout %SOURCE_BRANCH%
-git checkout -b %NEW_BRANCH%
+git checkout -b %TARGET_BRANCH%
