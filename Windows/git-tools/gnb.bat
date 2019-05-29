@@ -23,7 +23,7 @@ IF [%1] == [] (
 IF [%2] == [] (
     SET SOURCE_BRANCH=master
 ) ELSE (
-    SET SOURCE_BRANCH=%2
+    SET SOURCE_BRANCH=%1
 )
 
 git checkout %SOURCE_BRANCH%
