@@ -25,13 +25,12 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 sudo apt update
 sudo apt install -y code
 
-# Install DotNet Core
-sudo apt-key adv --keyserver packages.microsoft.com --recv-keys EB3E94ADBE1229CF
-sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-bionic-prod bionic main" > /etc/apt/sources.list.d/dotnetdev.list'
+# Install .Net Core
+wget -q https://packages.microsoft.com/config/ubuntu/19.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt install -y apt-transport-https
 sudo apt update
-sudo apt install -y dotnet-sdk-2.1.105
-rm microsoft.gpg
+sudo apt install -y dotnet-sdk-2.2
 
 # Install NodeJS
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
