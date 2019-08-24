@@ -33,9 +33,7 @@ sudo apt update
 sudo apt install -y dotnet-sdk-2.2
 
 # Install NodeJS
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-sudo apt install -y nodejs
-sudo apt install -y npm
+sudo apt install -y nodejs npm
 
 # Install Docker CE
 sudo apt-get install ca-certificates software-properties-common
