@@ -52,7 +52,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 # Install Slack
  sudo snap install slack --classic
  
-# JLDeen's DotFiles
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/jldeen/dotfiles/wsl/configure.sh)"
+# DotFiles
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/dillonad/dotfiles/master/configure.sh)"
 
 sudo reboot
