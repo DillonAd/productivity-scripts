@@ -21,6 +21,9 @@ EOF
 # Format main partition
 mkfs.ext4 /dev/sda1
 
+# Encrypt main partition
+cryptsetup luksFormat /dev/sda1
+
 # Format and enable swap partition
 mkswap /dev/sda2
 swapon /dev/sda2
@@ -29,7 +32,7 @@ swapon /dev/sda2
 mount /dev/sda1 /mnt
 
 # Bootstrap necessary packages
-pacstrap /mnt base linux linux-firmware vim iproute2 gnome budgie-desktop
+pacstrap /mnt base linux linux-firmware
 
 # Propagate partition config to disk
 genfstab -U /mnt >> /mnt/etc/fstab
