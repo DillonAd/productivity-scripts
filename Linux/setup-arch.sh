@@ -5,12 +5,12 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${TGTDEV}
   o # clear the in memory partition table
   n # new partition
   p # primary partition
-  2 # partition number 1
+  1 # partition number 1
     # default - start at beginning of disk 
-  +3G # 100 MB boot parttion
+  +100M # 100 MB boot parttion
   n # new partition
   p # primary partition
-  1 # partion number 2
+  2 # partion number 2
     # default, start immediately after preceding partition
     # default, extend partition to end of disk
   a # make a partition bootable
@@ -21,20 +21,20 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${TGTDEV}
 EOF
 
 # Format main partition
-mkfs.ext4 /dev/sda1
+# mkfs.ext4 /dev/sda1
 
 # Format and enable swap partition
-mkswap /dev/sda2
-swapon /dev/sda2
+# mkswap /dev/sda2
+# swapon /dev/sda2
 
 # Mount the main partition
-mount /dev/sda1 /mnt
+# mount /dev/sda1 /mnt
 
 # Bootstrap necessary packages
-pacstrap /mnt base linux linux-firmware vim iproute2 gnome budgie-desktop
+# pacstrap /mnt base linux linux-firmware vim iproute2 gnome budgie-desktop
 
 # Propagate partition config to disk
-genfstab -U /mnt >> /mnt/etc/fstab
+# genfstab -U /mnt >> /mnt/etc/fstab
 
 # CHROOT into the new installation
-arch-chroot /mnt
+# arch-chroot /mnt
