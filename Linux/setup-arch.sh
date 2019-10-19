@@ -23,24 +23,24 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   q # and we're done
 EOF
 
-# Format boot partition
-mkfs.ext4 /dev/sda1
+# # Format boot partition
+# mkfs.ext4 /dev/sda1
 
-# Format main partition
-mkfs.ext4 /dev/sda3
+# # Format main partition
+# mkfs.ext4 /dev/sda3
 
-# Format and enable swap partition
-mkswap /dev/sda2
-swapon /dev/sda2
+# # Format and enable swap partition
+# mkswap /dev/sda2
+# swapon /dev/sda2
 
-# Mount the main partition
-mount /dev/sda1 /mnt
+# # Mount the main partition
+# mount /dev/sda1 /mnt
 
-# Bootstrap necessary packages
-pacstrap /mnt base linux linux-firmware vim iproute2 gnome budgie-desktop
+# # Bootstrap necessary packages
+# pacstrap /mnt base linux linux-firmware vim iproute2 gnome budgie-desktop
 
-# Propagate partition config to disk
-genfstab -U /mnt >> /mnt/etc/fstab
+# # Propagate partition config to disk
+# genfstab -U /mnt >> /mnt/etc/fstab
 
-# CHROOT into the new installation
-arch-chroot /mnt
+# # CHROOT into the new installation
+# arch-chroot /mnt
