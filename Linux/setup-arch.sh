@@ -18,9 +18,6 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   q # and we're done
 EOF
 
-# Format main partition
-mkfs.ext4 /dev/sda1
-
 # Encrypt main partition
 cryptsetup luksFormat /dev/sda1
 
@@ -28,14 +25,14 @@ cryptsetup luksFormat /dev/sda1
 mkswap /dev/sda2
 swapon /dev/sda2
 
-# Mount the main partition
-mount /dev/sda1 /mnt
+# # Mount the main partition
+# mount /dev/sda1 /mnt
 
-# Bootstrap necessary packages
-pacstrap /mnt base linux linux-firmware
+# # Bootstrap necessary packages
+# pacstrap /mnt base linux linux-firmware
 
-# Propagate partition config to disk
-genfstab -U /mnt >> /mnt/etc/fstab
+# # Propagate partition config to disk
+# genfstab -U /mnt >> /mnt/etc/fstab
 
-# CHROOT into the new installation
-arch-chroot /mnt
+# # CHROOT into the new installation
+# arch-chroot /mnt
