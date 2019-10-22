@@ -20,13 +20,15 @@ EOF
 
 # Encrypt main partition
 cryptsetup luksFormat /dev/sda1
+cryptsetup open /dev/sda1 cryptroot
+mkfs.ext4 /dev/mapper/cryptroot
 
 # Format and enable swap partition
 mkswap /dev/sda2
 swapon /dev/sda2
 
 # # Mount the main partition
-# mount /dev/sda1 /mnt
+mount /dev/mapper/cryptroot /mnt
 
 # # Bootstrap necessary packages
 # pacstrap /mnt base linux linux-firmware
