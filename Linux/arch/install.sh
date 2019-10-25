@@ -9,6 +9,9 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/sda
     # default - start at beginning of disk 
   +512M  # 512 MB boot partition
   EF00 # specify EFI System partition
+  c # change partition name
+  1 # select boot partition
+  boot # allocate name
   n # new partition
   3 # partition number 3
     # default - start at beginning of disk 
