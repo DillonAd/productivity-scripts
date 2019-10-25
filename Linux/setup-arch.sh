@@ -41,7 +41,7 @@ mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
 # Bootstrap necessary packages
-pacstrap /mnt base linux linux-firmware iproute2 gnome budgie-desktop
+pacstrap /mnt base linux linux-firmware iproute2 gnome budgie-desktop vim
 
 # Propagate partition config to disk
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -55,6 +55,7 @@ hwclock --systohc
 
 # Localization
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
+locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 
 # Network Configuration
