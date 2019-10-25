@@ -5,14 +5,15 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   o # clear the in memory partition table
   n # new partition
   p # primary partition
-  3 # partition number 3
-    # default - start at beginning of disk 
-  +3072M  # 3072 MB swap partition
-  n # new partition
-  p # primary partition
   1 # partition number 1
     # default - start at beginning of disk 
   +512M  # 512 MB boot partition
+  a # make parition 1 bootable
+  n # new partition
+  p # primary partition
+  3 # partition number 3
+    # default - start at beginning of disk 
+  +3072M  # 3072 MB swap partition
   n # new partition
   p # primary partition
   2 # partition number 2
