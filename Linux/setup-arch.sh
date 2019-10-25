@@ -36,12 +36,13 @@ mkswap /dev/sda3
 swapon /dev/sda3
 
 # Format and enable boot partiton
-mkfs.fat -F32 /dev/sda1
+mkfs.fat -F 32 /dev/sda1
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
 # Bootstrap necessary packages
-pacstrap /mnt base linux linux-firmware iproute2 gnome budgie-desktop vim
+pacstrap /mnt base linux linux-firmware 
+# iproute2 gnome budgie-desktop vim
 
 # Propagate partition config to disk
 genfstab -U /mnt >> /mnt/etc/fstab
