@@ -26,11 +26,6 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | gdisk /dev/sda
   Y # and we're done
 EOF
 
-# Format and enable boot partiton
-mkfs.vfat -F32 /dev/sda1
-mkdir /mnt/boot
-mount /dev/sda1 /mnt/boot
-
 # Encrypt main partition
 cryptsetup luksFormat --type luks2 --cipher aes-xts-plain64 --key-size 512 /dev/sda2
 cryptsetup open /dev/sda2 cryptroot
@@ -38,6 +33,11 @@ mkfs.ext4 /dev/mapper/cryptroot
 
 # Mount the main partition
 mount /dev/mapper/cryptroot /mnt
+
+# Format and enable boot partiton
+mkfs.vfat -F32 /dev/sda1
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
 
 # Format and enable swap partition
 mkswap /dev/sda3
