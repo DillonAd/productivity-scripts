@@ -35,7 +35,7 @@ mkfs.ext4 /dev/mapper/cryptroot
 mount /dev/mapper/cryptroot /mnt
 
 # Format and enable boot partiton
-mkfs.vfat -F32 -n boot /dev/sda1
+mkfs.vfat -F32 -n BOOT /dev/sda1
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
