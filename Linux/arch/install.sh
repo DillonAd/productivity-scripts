@@ -1,7 +1,5 @@
 #!/bin/bash
 
-pacman -Sy --noconfirm gdisk
-
 # https://superuser.com/questions/332252/how-to-create-and-format-a-partition-using-a-bash-script
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   o # clear the in memory partition table
