@@ -10,7 +10,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   +512M  # 512 MB boot partition
   a # make parition 1 bootable
   t # change partition type
-  b # WD95 FAT32
+  ef# EFI (FAT-12/16/32)
   n # new partition
   p # primary partition
   3 # partition number 3
@@ -35,7 +35,7 @@ mkfs.ext4 /dev/mapper/cryptroot
 mount /dev/mapper/cryptroot /mnt
 
 # Format and enable boot partiton
-mkfs.vfat -F32 /dev/sda1
+mkfs.vfat -F32 -n boot /dev/sda1
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
