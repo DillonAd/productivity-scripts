@@ -3,6 +3,7 @@
 # https://superuser.com/questions/332252/how-to-create-and-format-a-partition-using-a-bash-script
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   o # clear the in memory partition table
+  g # create GPT disklabel
   n # new partition
   p # primary partition
   1 # partition number 1
@@ -10,7 +11,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   +512M  # 512 MB boot partition
   a # make parition 1 bootable
   t # change partition type
-  ef# EFI (FAT-12/16/32)
+  1 # EFI System
   n # new partition
   p # primary partition
   3 # partition number 3
