@@ -5,25 +5,21 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   o # clear the in memory partition table
   g # create GPT disklabel
   n # new partition
-  p # primary partition
   1 # partition number 1
     # default - start at beginning of disk 
   +512M  # 512 MB boot partition
   t # change partition type
   1 # EFI System
   n # new partition
-  p # primary partition
   3 # partition number 3
     # default - start at beginning of disk 
   +3072M  # 3072 MB swap partition
   n # new partition
-  p # primary partition
   2 # partition number 2
     # default, start immediately after preceding partition
     # default, extend partition to end of disk
   p # print the in-memory partition table
   w # write the partition table
-  q # and we're done
 EOF
 
 # Encrypt main partition
