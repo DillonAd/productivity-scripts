@@ -26,3 +26,19 @@ mkinitcpio -P
 echo Enter new root password
 read NEW_PASS
 echo 'root:$NEW_PASS' | chpasswd
+
+# Encrypted Swap
+mkfs.ext2 -L cryptswap /dev/sda3 1M
+echo 'swap LABEL=cryptswap /dev/urandom swap,offset=2048,cipher=aes-xts-plain64,size=512' >> /etc/crypttab
+echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
+
+# Setup systemd
+bootctl install
+
+SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
+
+echo 'title Arch Linux
+linux /vmlinuz-linux
+initrd /intel-ucode.img
+initrd /initramfs-linux.img
+options options rd.luks.name=$SDA2_UUID=cryptroot root=/dev/mapper/cryptroot rw' > /boot/loader/entries/arch.conf
