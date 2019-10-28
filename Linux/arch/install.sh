@@ -36,6 +36,7 @@ mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
 # Format and enable swap partition
+mkfs.ext4 -L cryptswap /dev/sda3
 mkswap /dev/sda3
 swapon /dev/sda3
 

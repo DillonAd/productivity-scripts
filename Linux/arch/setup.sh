@@ -28,9 +28,11 @@ read NEW_PASS
 echo 'root:$NEW_PASS' | chpasswd
 
 # Encrypted Swap
-mkfs.ext2 -L cryptswap /dev/sda3 1M
 echo 'swap LABEL=cryptswap /dev/urandom swap,offset=2048,cipher=aes-xts-plain64,size=512' >> /etc/crypttab
 echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
+
+# Intel microcode
+pacman -Sy --noconfirm intel-ucode
 
 # Setup systemd
 bootctl install
@@ -41,4 +43,9 @@ echo 'title Arch Linux
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
-options options rd.luks.name=$SDA2_UUID=cryptroot root=/dev/mapper/cryptroot rw' > /boot/loader/entries/arch.conf
+options options rd.luks.name=${SDA2_UUID}=cryptroot root=/dev/mapper/cryptroot rw' > /boot/loader/entries/arch.conf
+
+# Network Manager
+pacman -Sy --noconfirm networkmanager
+systemctl enable NetworkManager
+systemctl start NetworkManager
