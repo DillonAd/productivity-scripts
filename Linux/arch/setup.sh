@@ -23,8 +23,6 @@ echo "
 echo '' > /etc/vconsole.conf
 
 # mkinitcpio config
-cat /etc/mkinitcpio.conf
-read -p "press any key to continue"
 sed -i s/'HOOKS=([0-9A-Za-z ].*)'/'HOOKS=(base systemd udev autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems fsck)'/ /etc/mkinitcpio.conf
 
 # Initramfs configuration
