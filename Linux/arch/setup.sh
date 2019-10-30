@@ -20,7 +20,7 @@ echo "
 127.0.1.1	$HOSTNAME.localdomain	$HOSTNAME"  >> /etc/hosts
 
 # VConsole Config
-echo '' > vconsole.conf
+echo '' > /etc/vconsole.conf
 
 # mkinitcpio config
 sed s/'HOOKS=([0-9A-Za-z ].*)'/'HOOKS=(base systemd udev autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems fsck)'/ /etc/mkinitcpio.conf > /etc/mkinitcpio.conf
