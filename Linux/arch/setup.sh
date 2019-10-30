@@ -17,7 +17,7 @@ echo $HOSTNAME > /etc/hostname
 echo "
 127.0.0.1	localhost
 ::1		    localhost
-127.0.1.1	$HOSTNAME.localdomain	$HOSTNAME"  >> /ect/hosts
+127.0.1.1	$HOSTNAME.localdomain	$HOSTNAME"  >> /etc/hosts
 
 # VConsole Config
 echo '' > vconsole.conf
