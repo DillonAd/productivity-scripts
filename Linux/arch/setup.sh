@@ -19,6 +19,12 @@ echo "
 ::1		    localhost
 127.0.1.1	$HOSTNAME.localdomain	$HOSTNAME"  >> /ect/hosts
 
+# VConsole Config
+echo '' > vconsole.conf
+
+# mkinitcpio config
+sed s/'HOOKS=([0-9A-Za-z ].*)'/'HOOKS=(base systemd udev autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems fsck)'/ /etc/mkinitcpio.conf > /etc/mkinitcpio.conf
+
 # Initramfs configuration
 mkinitcpio -P
 
@@ -39,13 +45,12 @@ bootctl install
 
 SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
 
-echo 'title Arch Linux
+echo "title Arch Linux
 linux /vmlinuz-linux
 initrd /intel-ucode.img
 initrd /initramfs-linux.img
-options options rd.luks.name=${SDA2_UUID}=cryptroot root=/dev/mapper/cryptroot rw' > /boot/loader/entries/arch.conf
+options rd.luks.name=${SDA2_UUID}=cryptroot root=/dev/mapper/cryptroot rw" > /boot/loader/entries/arch.conf
 
 # Network Manager
-pacman -Sy --noconfirm networkmanager
 systemctl enable NetworkManager
 systemctl start NetworkManager

@@ -41,8 +41,7 @@ mkswap /dev/sda3
 swapon /dev/sda3
 
 # Bootstrap necessary packages
-pacstrap /mnt base linux linux-firmware
-# iproute2 gnome budgie-desktop vim
+pacstrap /mnt base base-devel linux linux-firmware iproute2 vim wget networkmanager
 
 # Propagate partition config to disk
 genfstab -U /mnt >> /mnt/etc/fstab
