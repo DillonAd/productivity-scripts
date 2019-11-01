@@ -33,7 +33,7 @@ echo 'swap LABEL=cryptswap /dev/urandom swap,offset=2048,cipher=aes-xts-plain64,
 echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
 
 # mkinitcpio config
-sed -i s/'HOOKS=([0-9A-Za-z ].*)'/'HOOKS=(base systemd udev autodetect keyboard sd-vconsole modconf block sd-encrypt filesystems fsck)'/ /etc/mkinitcpio.conf
+sed -i s/'HOOKS=([0-9A-Za-z ].*)'/'HOOKS=(base systemd udev autodetect keyboard sd-vconsole modconf block sd-encrypt encrypt filesystems fsck)'/ /etc/mkinitcpio.conf
 
 # Initramfs configuration
 mkinitcpio -P
