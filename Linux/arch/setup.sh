@@ -58,6 +58,6 @@ echo 'root:$NEW_PASS' | chpasswd
 # options rd.luks.name=${SDA2_UUID}=cryptroot root=/dev/mapper/cryptroot rw" > /boot/loader/entries/arch.conf
 
 # Install GRUB bootloader
-pacman -S grub
+pacman -S --noconfirm grub
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
