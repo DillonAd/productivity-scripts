@@ -7,7 +7,6 @@ hwclock --systohc
 
 # Localization
 sed -i s/'#en_US.UTF-8 UTF-8'/'en_US.UTF-8 UTF-8'/ /etc/locale.gen
-#echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 
@@ -32,11 +31,21 @@ systemctl enable NetworkManager
 echo 'swap LABEL=cryptswap /dev/urandom swap,offset=2048,cipher=aes-xts-plain64,size=512' >> /etc/crypttab
 echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
 
+# Install GRUB bootloader
+pacman -S --noconfirm grub
+
+# GRUB ecrypted drive
+sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#cryptdevice=/dev/sda2:cryptroot#' /etc/default/grub
+
+# Configure GRUB bootloader
+grub-install --recheck /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
 # mkinitcpio config
-sed -i s/'HOOKS=([0-9A-Za-z ].*)'/'HOOKS=(base systemd udev autodetect keyboard sd-vconsole modconf block sd-encrypt encrypt filesystems fsck)'/ /etc/mkinitcpio.conf
+sed -i 's/^\(HOOKS=".*\)\(filesystems.*\)/ encrypt /' /etc/mkinitcpio.conf
 
 # Initramfs configuration
-mkinitcpio -P
+mkinitcpio -p linux
 
 # Set root password
 echo Enter new root password
@@ -56,8 +65,3 @@ echo 'root:$NEW_PASS' | chpasswd
 # initrd /intel-ucode.img
 # initrd /initramfs-linux.img
 # options rd.luks.name=${SDA2_UUID}=cryptroot root=/dev/mapper/cryptroot rw" > /boot/loader/entries/arch.conf
-
-# Install GRUB bootloader
-pacman -S --noconfirm grub
-grub-install /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
