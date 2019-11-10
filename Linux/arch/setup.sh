@@ -24,7 +24,7 @@ echo "
 127.0.0.1    $HOSTNAME.localdomain    $HOSTNAME"  >> /etc/hosts
 
 # Network Manager
-pacman -S --noconfirm networkmanager
+pacman -Sy --noconfirm networkmanager
 systemctl enable NetworkManager
 
 # Encrypted Swap
@@ -32,10 +32,10 @@ echo 'swap LABEL=cryptswap /dev/urandom swap,offset=2048,cipher=aes-xts-plain64,
 echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
 
 # Install GRUB bootloader
-pacman -S --noconfirm grub
+pacman -Sy --noconfirm grub grub-bios
 
 # GRUB ecrypted drive
-sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot"#' /etc/default/grub
+sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot#' /etc/default/grub
 sed -i 's/#GRUB_ENABLE_CRYPTODISK=y/GRUB_ENABLE_CRYPTODISK=y/' /etc/default/grub
 
 # mkinitcpio config
@@ -44,10 +44,8 @@ sed -i '/^HOOK/s/filesystems/encrypt filesystems/' /etc/mkinitcpio.conf
 # Initramfs configuration
 mkinitcpio -p linux
 
-
 # Intel microcode
-pacman -S --noconfirm intel-ucode
-
+pacman -Sy --noconfirm intel-ucode
 
 # Configure GRUB bootloader
 grub-install --recheck /dev/sda
