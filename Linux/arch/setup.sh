@@ -35,12 +35,11 @@ echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
 pacman -S --noconfirm grub
 
 # GRUB ecrypted drive
-sed -i s/'GRUB_CMDLINE_LINUX=""'/'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot"'/ /etc/default/grub
-#sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#cryptdevice=/dev/sda2:cryptroot#' /etc/default/grub
-echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
+sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot"#' /etc/default/grub
+sed -i 's/#GRUB_ENABLE_CRYPTODISK=y/GRUB_ENABLE_CRYPTODISK=y/' /etc/default/grub
 
 # mkinitcpio config
-sed -i 's/^\(HOOKS=".*\)\(filesystems.*\)/ encrypt /' /etc/mkinitcpio.conf
+sed -i '/^HOOK/s/filesystems/encrypt filesystems/' /etc/mkinitcpio.conf
 
 # Initramfs configuration
 mkinitcpio -p linux
