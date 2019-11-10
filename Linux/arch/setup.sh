@@ -35,11 +35,9 @@ echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
 pacman -S --noconfirm grub
 
 # GRUB ecrypted drive
-sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#cryptdevice=/dev/sda2:cryptroot#' /etc/default/grub
-
-# Configure GRUB bootloader
-grub-install --recheck /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
+sed -i s/'GRUB_CMDLINE_LINUX=""'/'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot"'/ /etc/default/grub
+#sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#cryptdevice=/dev/sda2:cryptroot#' /etc/default/grub
+echo GRUB_ENABLE_CRYPTODISK=y >> /etc/default/grub
 
 # mkinitcpio config
 sed -i 's/^\(HOOKS=".*\)\(filesystems.*\)/ encrypt /' /etc/mkinitcpio.conf
@@ -47,21 +45,17 @@ sed -i 's/^\(HOOKS=".*\)\(filesystems.*\)/ encrypt /' /etc/mkinitcpio.conf
 # Initramfs configuration
 mkinitcpio -p linux
 
+
+# Intel microcode
+pacman -S --noconfirm intel-ucode
+
+
+# Configure GRUB bootloader
+grub-install --recheck /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
 # Set root password
 echo Enter new root password
 read NEW_PASS
 echo 'root:$NEW_PASS' | chpasswd
-
-# Intel microcode
-#pacman -Sy --noconfirm intel-ucode
-
-# Setup systemd
-# bootctl install
-
-# SDA2_UUID=$(blkid -s UUID -o value /dev/sda2)
-
-# echo "title Arch Linux
-# linux /vmlinuz-linux
-# initrd /intel-ucode.img
-# initrd /initramfs-linux.img
-# options rd.luks.name=${SDA2_UUID}=cryptroot root=/dev/mapper/cryptroot rw" > /boot/loader/entries/arch.conf
+clear
