@@ -30,7 +30,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
 EOF
 
 # Encrypt main partition
-cryptsetup luksFormat --type luks2 --cipher aes-xts-plain64 --key-size 512 /dev/sda2
+cryptsetup luksFormat --type luks1 --cipher aes-xts-plain64 --key-size 512 /dev/sda2
 cryptsetup open /dev/sda2 cryptroot
 mkfs.ext4 /dev/mapper/cryptroot
 
