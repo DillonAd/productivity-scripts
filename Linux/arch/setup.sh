@@ -32,7 +32,7 @@ echo 'swap LABEL=cryptswap /dev/urandom swap,offset=2048,cipher=aes-xts-plain64,
 echo '/dev/mapper/swap none swap defaults 0 0' >> /etc/fdisk
 
 # Install GRUB bootloader
-pacman -Sy --noconfirm grub grub-bios
+#pacman -Sy --noconfirm grub grub-bios
 
 # GRUB ecrypted drive
 sed -i 's#^\(GRUB_CMDLINE_LINUX="\)#GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptroot#' /etc/default/grub
