@@ -48,7 +48,7 @@ mkinitcpio -p linux
 pacman -Sy --noconfirm intel-ucode
 
 # Configure GRUB bootloader
-grub-install --recheck /dev/sda
+grub-install --target=x86_64-efi --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Set root password
