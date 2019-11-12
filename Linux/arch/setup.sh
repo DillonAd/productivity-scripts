@@ -54,5 +54,5 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Set root password
 echo Enter new root password
 read NEW_PASS
-echo 'root:$NEW_PASS' | chpasswd
+echo "root:$NEW_PASS" | chpasswd
 clear
