@@ -16,7 +16,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   p # primary
   3 # partition number 3
     # default - start at beginning of disk 
-  +3072M  # 3072 MB swap partition
+  +4096M  # 4096 MB swap partition
   t # change partition type
   3 # partition 3
   82 # Linux swap type
