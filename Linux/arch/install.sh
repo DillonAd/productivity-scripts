@@ -11,6 +11,8 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
   1 # partition number 1
     # default - start at beginning of disk 
   +512M  # 512 MB boot partition
+  t # change partition type
+  ef# EFI type
   a # set as boot partition
   n # new partition
   p # primary
