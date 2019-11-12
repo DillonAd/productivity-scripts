@@ -50,7 +50,7 @@ mount /dev/mapper/cryptroot /mnt
 mount /dev/sda1 /mnt/boot
 
 # Bootstrap necessary packages
-pacstrap /mnt base base-devel linux linux-firmware iproute2 vim wget grub grub-bios
+pacstrap /mnt base base-devel linux linux-firmware iproute2 vim wget grub
 
 # Propagate partition config to disk
 genfstab -U /mnt >> /mnt/etc/fstab
