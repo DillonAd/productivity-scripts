@@ -37,7 +37,7 @@ cryptsetup open /dev/sda2 cryptroot
 mkfs.ext4 /dev/mapper/cryptroot
 
 # Format and enable boot partiton
-mkfs.ext4 -n BOOT /dev/sda1
+mkfs.fat -F32 -n BOOT /dev/sda1
 mkdir /mnt/boot
 
 # Format and enable swap partition
@@ -50,7 +50,7 @@ mount /dev/mapper/cryptroot /mnt
 mount /dev/sda1 /mnt/boot
 
 # Bootstrap necessary packages
-pacstrap /mnt base base-devel linux linux-firmware iproute2 vim wget grub efibootmgr
+pacstrap /mnt base base-devel linux linux-firmware iproute2 vim wget grub efibootmgr dosfstools os-prober mtools
 
 # Propagate partition config to disk
 genfstab -U /mnt >> /mnt/etc/fstab
