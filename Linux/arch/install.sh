@@ -5,28 +5,27 @@ timedatectl set-ntp true
 
 # https://superuser.com/questions/332252/how-to-create-and-format-a-partition-using-a-bash-script
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
-  o # clear the in memory partition table
+  g # clear the in memory partition table and replace with a gpt table
   n # new partition
-  p # primary
   1 # partition number 1
     # default - start at beginning of disk 
   +512M  # 512 MB boot partition
   t # change partition type
-  ef# EFI type
-  a # set as boot partition
+  1 # EFI System type
   n # new partition
-  p # primary
   3 # partition number 3
     # default - start at beginning of disk 
   +4096M  # 4096 MB swap partition
   t # change partition type
   3 # partition 3
-  82 # Linux swap type
+  19 # Linux swap type
   n # new partition
-  p # primary
   2 # partition number 2
     # default, start immediately after preceding partition
     # default, extend partition to end of disk
+  t # change partition type
+  2 # partition 2
+  20 # Linux filesystem type
   p # print the in-memory partition table
   w # write the partition table
 EOF
