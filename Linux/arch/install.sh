@@ -37,7 +37,7 @@ mkfs.ext4 /dev/mapper/cryptroot
 
 # Format and enable boot partiton
 mkfs.fat -F32 -n BOOT /dev/sda1
-mkdir /mnt/boot
+mkdir /mnt/boot/EFI
 
 # Format and enable swap partition
 #mkfs.ext4 -L cryptswap /dev/sda3
@@ -46,7 +46,7 @@ swapon /dev/sda3
 
 # Mount the file system
 mount /dev/mapper/cryptroot /mnt
-mount /dev/sda1 /mnt/boot
+mount /dev/sda1 /mnt/boot/EFI
 
 # Bootstrap necessary packages
 pacstrap /mnt base base-devel linux linux-firmware iproute2 vim wget grub efibootmgr dosfstools os-prober mtools
