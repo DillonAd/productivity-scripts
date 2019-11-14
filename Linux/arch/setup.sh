@@ -47,8 +47,12 @@ mkinitcpio -p linux
 # Intel microcode
 pacman -Sy --noconfirm intel-ucode
 
+# Mount EFI Boot Parition
+mkdir /boot/EFI
+mount /dev/sda1 /boot/EFI
+
 # Configure GRUB bootloader
-grub-install --recheck /dev/sda
+grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --efi-directory=/boot/EFI --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Set root password

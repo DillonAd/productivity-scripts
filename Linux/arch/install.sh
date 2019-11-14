@@ -46,7 +46,7 @@ swapon /dev/sda3
 
 # Mount the file system
 mount /dev/mapper/cryptroot /mnt
-mount /dev/sda1 /mnt/boot/EFI
+mount /dev/sda1 /mnt/boot
 
 # Bootstrap necessary packages
 pacstrap /mnt base base-devel linux linux-firmware iproute2 vim wget grub efibootmgr dosfstools os-prober mtools
