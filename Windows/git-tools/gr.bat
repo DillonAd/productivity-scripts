@@ -1,10 +1,9 @@
 @echo off
-setlocal EnableDelayedExpansion
 
 REM
-REM Git Update
+REM Git Rebase Branch
 REM
-REM This script is intended to update the current working branch from master (or a specified branch)
+REM This script is intended to rebase new changes from master onto an existing feature branch
 REM
 
 IF [%1] == [] (
@@ -22,4 +21,4 @@ ECHO Current Branch : %CURRENT_BRANCH%
 git checkout %TARGET_BRANCH%
 git pull
 git checkout %CURRENT_BRANCH%
-git merge %TARGET_BRANCH%
+git rebase %TARGET_BRANCH% %CURRENT_BRANCH%

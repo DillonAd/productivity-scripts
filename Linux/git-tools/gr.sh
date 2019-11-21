@@ -20,4 +20,4 @@ echo Current Branch : $CURRENT_BRANCH
 git checkout $TARGET_BRANCH
 git pull
 git checkout $CURRENT_BRANCH
-git merge $TARGET_BRANCH
+git rebase $TARGET_BRANCH $CURRENT_BRANCH
