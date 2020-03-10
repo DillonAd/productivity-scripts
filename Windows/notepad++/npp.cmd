@@ -1,2 +1,2 @@
 @echo off
-start notepad++ %cd%\%1
+start notepad++ "%cd%\%1"
